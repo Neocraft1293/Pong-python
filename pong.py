@@ -16,10 +16,10 @@ LARGEUR_RAQUETTE, HAUTEUR_RAQUETTE = 15, 80
 DIMENSION_BALLE = 15
 VITESSE_RAQUETTE = 2
 VITESSE_BALLE = 1
-nombre_de_rebond_debut = random.randint(8, 10)  # Corrigé : "rebond" est au singulier
+nombre_de_rebond_debut = random.randint(17, 20)  # Corrigé : "rebond" est au singulier
 nombre_de_rebond = nombre_de_rebond_debut  # Corrigé : "rebond" est au singulier
 nombre_de_rebond_additionnel_max = 8  # Corrigé : "rebond" est au singulier
-nombre_de_rebond_additionnel_min = 3  # Corrigé : "rebond" est au singulier
+nombre_de_rebond_additionnel_min = 1  # Corrigé : "rebond" est au singulier
 nombre_de_rebond_additionnel = random.randint(nombre_de_rebond_additionnel_min, nombre_de_rebond_additionnel_max)
 verritable_nombre_de_rebond = 0
 # Création des raquettes et de la balle

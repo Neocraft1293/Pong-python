@@ -64,8 +64,8 @@ while True:
     # Mouvement de la balle
     balle.move_ip(dx_balle, dy_balle)
 
-    # Collision de la balle avec le haut et le bas de l'écran
-    if balle.top < 0 or balle.bottom > HAUTEUR_ECRAN:
+    # Collision de la balle avec les ligne blanc en haut et en bas de l'écran
+    if balle.top <= 0 or balle.bottom >= HAUTEUR_ECRAN:
         dy_balle *= -1
         # lance le song ping_pong_8bit_beeep.ogg
         pygame.mixer.music.load('ping_pong_8bit_beeep.ogg')
@@ -108,15 +108,32 @@ while True:
     pygame.draw.rect(écran, (255, 255, 255), raquette2)
     pygame.draw.ellipse(écran, (255, 255, 255), balle)
 
-    # Affichage des compteurs de points
-    score_texte = font.render(f"{score_joueur1} - {score_joueur2}", True, (255, 255, 255))
+# Utilisation d'une police fixe pour le texte des scores
+    font_scores = pygame.font.Font("minecraft_font.ttf", 64)
+
+# Affichage des scores avec la nouvelle police
+    score_texte = font_scores.render(f"{score_joueur1}    {score_joueur2}", True, (255, 255, 255))
     écran.blit(score_texte, (LARGEUR_ECRAN // 2 - score_texte.get_width() // 2, 10))
+
+
+    #affichage du de deux ligne blanc en bas et en haut de l'écran
+    pygame.draw.line(écran, (255, 255, 255), (0, 0), (LARGEUR_ECRAN, 0), 10)
+    pygame.draw.line(écran, (255, 255, 255), (0, HAUTEUR_ECRAN), (LARGEUR_ECRAN, HAUTEUR_ECRAN), 10)
+
     # Affichage de la vitesse de la balle en bas de l'écran
-    vitesse_texte = font.render(f"Vitesse : {vitesse_balle:.1f}", True, (255, 255, 255))
-    écran.blit(vitesse_texte, (LARGEUR_ECRAN // 2 - vitesse_texte.get_width() // 2, HAUTEUR_ECRAN - 40))
+    #vitesse_texte = font.render(f"Vitesse : {vitesse_balle:.1f}", True, (255, 255, 255))
+    #écran.blit(vitesse_texte, (LARGEUR_ECRAN // 2 - vitesse_texte.get_width() // 2, HAUTEUR_ECRAN - 40))
     # Affichage du nombre véritable de rebond en bas de l'écran au dessus de la vitesse
-    nombre_rebond_texte = font.render(f"Nombre de rebond : {verritable_nombre_de_rebond}", True, (255, 255, 255))
-    écran.blit(nombre_rebond_texte, (LARGEUR_ECRAN // 2 - nombre_rebond_texte.get_width() // 2, HAUTEUR_ECRAN - 80))
+    #nombre_rebond_texte = font.render(f"Nombre de rebond : {verritable_nombre_de_rebond}", True, (255, 255, 255))
+    #écran.blit(nombre_rebond_texte, (LARGEUR_ECRAN // 2 - nombre_rebond_texte.get_width() // 2, HAUTEUR_ECRAN - 80))
+
+# Dessin d'une ligne discontinue au milieu de l'écran
+    espacement = 10  # Espacement entre chaque segment de la ligne
+    for y in range(0, HAUTEUR_ECRAN, espacement*2):
+        pygame.draw.line(écran, (255, 255, 255), (LARGEUR_ECRAN // 2, y), (LARGEUR_ECRAN // 2, y + espacement), 5)
+
+
+
     pygame.display.flip()
 
     # Limite le taux de rafraîchissement à 60 images par seconde
